@@ -9,8 +9,7 @@
 //! let mut audio = Audio::new();
 //! audio.add("startup", "audio_subsystem_initialized.mp3");
 //! audio.play("startup"); // Execution continues while playback occurs in another thread.
-//! // To actually hear the sound, the process needs to live while the sound plays.
-//! std::thread::sleep(std::time::Duration::from_millis(2000));
+//! audio.wait(); // Block until no sounds are playing
 //! ```
 
 use rodio::{
@@ -80,6 +79,17 @@ impl Audio {
         self.current_channel += 1;
         if self.current_channel >= self.channels.len() {
             self.current_channel = 0;
+        }
+    }
+    /// Block until no sounds are playing. Convenient for keeping a thread alive until all sounds
+    /// have played.
+    pub fn wait(&self) {
+        loop {
+            if self.channels.iter().any(|x| x.empty() == false) {
+                std::thread::sleep(std::time::Duration::from_millis(50));
+                continue;
+            }
+            break;
         }
     }
 }
