@@ -1,0 +1,15 @@
+[package]
+name = "rusty_audio"
+version = "1.0.0"
+authors = ["Nathan Stocks <nathan.stocks@gmail.com>"]
+description = "Convenient sound library for small projects and educational purposes."
+homepage = "https://github.com/CleanCut/rusty_sound"
+readme = "README.md"
+keywords = ["audio", "sound", "effects", "sfx", "rusty"]
+license = "MIT"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rodio = "0.9.0"
