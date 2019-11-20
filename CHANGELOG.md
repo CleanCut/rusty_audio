@@ -1,8 +1,12 @@
-# Version 1.1.0
+# Version 1.1.1
 ## 19 Nov 2019
 
-- Added the `.wait()` method to `Audio` to block until no sounds are playing.
 - Updated rodio to 0.10.0
+
+# Version 1.1.0
+## 10 Oct 2019 (later in the day)
+
+- Added the `.wait()` method to `Audio` to block until no sounds are playing.
 
 # Version 1.0.0
 ## 10 Oct 2019
