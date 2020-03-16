@@ -1,3 +1,10 @@
+# Version 1.1.2+
+
+- `rusty_audio` is now [part] of [`rusty_engine`]
+
+[part]: https://github.com/cleancut/rusty_engine/tree/master/rusty_audio
+ [`rusty_engine`]: https://github.com/cleancut/rusty_engine
+
 # Version 1.1.1
 ## 19 Nov 2019
 
