@@ -1,22 +1,53 @@
-# Version 1.1.2+
+<!-- next-header -->
 
-- `rusty_audio` is now [part] of [`rusty_engine`]
+## [Unreleased] - ReleaseDate
 
-[part]: https://github.com/cleancut/rusty_engine/tree/master/rusty_audio
- [`rusty_engine`]: https://github.com/cleancut/rusty_engine
+### Changed
 
-# Version 1.1.1
-## 19 Nov 2019
+- Broke `rusty_audio` back out of `rusty_engine` into its own standalone project again
 
-- Updated rodio to 0.10.0
+## 1.1.5 - 2021-02-26
 
-# Version 1.1.0
-## 10 Oct 2019 (later in the day)
+### Changed
 
-- Added the `.wait()` method to `Audio` to block until no sounds are playing.
+- Updated `rodio` to 0.11.0 to get the downstream `cpal` dependency up to 0.11.0
 
-# Version 1.0.0
-## 10 Oct 2019
+## 1.1.4 - 2020-03-24
+
+### Changed
+
+- Removed the `prelude` module
+
+## 1.1.3 - 2020-03-14
+
+### Changed
+
+- `rusty_audio` became part of [`rusty_engine`] as of this release (reverted in after 1.1.5)
+- Added option to use Apache 2.0 license
+
+[`rusty_engine`]: https://github.com/cleancut/rusty_engine
+
+## 1.1.2 - 2020-03-14
+
+### Borked
+
+- Failed release -- Yanked
+
+## 1.1.1 - 2019-11-19
+
+### Changed
+
+- Updated `rodio` to 0.10.0
+
+## 1.1.0 - 2019-10-10 (later in the day)
+
+### Added
+
+- Added the `.wait()` method to `Audio` to block until no sounds are playing
+
+## 1.0.0 - 2019-10-10
+
+### Added
 
 - Initial release, ported from [rusty_sword_arena](https://github.com/cleancut/rusty_sword_arena)
   so it can be reused in other projects such as 
