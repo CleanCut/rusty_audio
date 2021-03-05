@@ -1,3 +1,8 @@
+[![Crates.io](https://img.shields.io/crates/v/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
+[![Crates.io](https://img.shields.io/crates/d/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
+[![Rust](https://github.com/cleancut/rusty_audio/workflows/CI/badge.svg)](https://github.com/cleancut/rusty_audio/actions)
+
+
 # `rusty_audio`
 
 `rusty_audio` is a fun and easy audio library that provides a 4-track audio system to load/decode
