@@ -34,9 +34,8 @@ fn main() {
 
 ### Dependencies on Linux
 
-For Linux, the
-([CPAL](https://github.com/RustAudio/cpal) package that is used under the hood requires
-the *alsa* development libraries to be installed.
+For Linux, the [CPAL](https://github.com/RustAudio/cpal) package that is used under the hood
+requires the *alsa* development libraries to be installed.
 
 **CentOS**
 
