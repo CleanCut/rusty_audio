@@ -45,3 +45,24 @@ sudo yum install -y alsa-lib-devel
 ```bash
 sudo apt install libasound2-dev
 ```
+
+## Contribution
+
+All contributions are assumed to be dual-licensed under MIT/Apache-2.
+
+## License
+
+Distributed under the terms of both the MIT license and the Apache License (Version 2.0).
+
+See [license/APACHE](license/APACHE) and [license/MIT](license/MIT).
+
+## Sponsor
+
+If you like Rusty Audio, please consider [sponsoring me] on GitHub. 💖
+
+[CPAL]: https://github.com/RustAudio/cpal
+[Questions]: https://github.com/CleanCut/rusty_engine/issues/new
+[Ultimate Rust Crash Course]: https://agileperception.com/ultimate_rust_crash_course
+[bug reports]: https://github.com/CleanCut/rusty_engine/issues/new
+[rendy]: https://github.com/amethyst/rendy
+[sponsoring me]: https://github.com/sponsors/CleanCut
