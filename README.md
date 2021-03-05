@@ -3,10 +3,11 @@
 [![Rust](https://github.com/cleancut/rusty_audio/workflows/CI/badge.svg)](https://github.com/cleancut/rusty_audio/actions)
 
 
-# `rusty_audio`
+# Rusty Audio Playback Library
 
 `rusty_audio` is a fun and easy audio playback library that provides a 4-track audio system to
-load/decode audio files and play them, perfect for small projects.
+load/decode audio files and play them, perfect for small projects.  It is also well-suited for
+training purposes, and is featured in the [Ultimate Rust Crash Course] on Udemy.
 
 - Formats: MP3, WAV, Vorbis and Flac.
 - Platforms: Supports macOS, Windows, and iOS out of the box. Linux requires installation of
@@ -14,9 +15,6 @@ load/decode audio files and play them, perfect for small projects.
 
 This library uses the [rodio] audio playback library under the hood, which you should
 consider using directly if your needs are more complex.
-
-[`rusty_engine`]: https://github.com/cleancut/rusty_engine
-[rodio]: https://github.com/RustAudio/rodio
 
 ### Example
 
@@ -39,7 +37,7 @@ fn main() {
 
 ### Dependencies on Linux
 
-For Linux, the [CPAL](https://github.com/RustAudio/cpal) package that is used under the hood
+For Linux, the [CPAL] package that is used under the hood
 requires the *alsa* development libraries to be installed.
 
 **CentOS**
@@ -69,8 +67,6 @@ See [license/APACHE](license/APACHE) and [license/MIT](license/MIT).
 If you like Rusty Audio, please consider [sponsoring me] on GitHub. 💖
 
 [CPAL]: https://github.com/RustAudio/cpal
-[Questions]: https://github.com/CleanCut/rusty_engine/issues/new
-[Ultimate Rust Crash Course]: https://agileperception.com/ultimate_rust_crash_course
-[bug reports]: https://github.com/CleanCut/rusty_engine/issues/new
-[rendy]: https://github.com/amethyst/rendy
+[rodio]: https://github.com/RustAudio/rodio
 [sponsoring me]: https://github.com/sponsors/CleanCut
+[Ultimate Rust Crash Course]: https://agileperception.com/ultimate_rust_crash_course
