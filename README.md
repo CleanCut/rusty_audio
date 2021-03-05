@@ -22,7 +22,7 @@ use rusty_audio::Audio;
 
 fn main() {
     let mut audio = Audio::new();
-    audio.add("startup", "audio_subsystem_initialized.mp3"); // Load the sound, give it a name
+    audio.add("startup", "my_sound_file.mp3"); // Load the sound, give it a name
     audio.play("startup"); // Execution continues while playback occurs in another thread.
     audio.wait(); // Block until sounds finish playing
 }
