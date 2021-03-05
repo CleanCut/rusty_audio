@@ -7,9 +7,9 @@
 //! ```
 //! use rusty_audio::Audio;
 //! let mut audio = Audio::new();
-//! audio.add("startup", "audio_subsystem_initialized.mp3");
+//! audio.add("startup", "audio_subsystem_initialized.mp3"); // Load the sound, give it a name
 //! audio.play("startup"); // Execution continues while playback occurs in another thread.
-//! audio.wait(); // Block until no sounds are playing
+//! audio.wait(); // Block until sounds finish playing
 //! ```
 
 use rodio::{

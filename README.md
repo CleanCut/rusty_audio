@@ -7,12 +7,31 @@ This library uses the very powerful [rodio] audio playback library under the hoo
 consider using directly if your needs are more complex.
 
 [`rusty_engine`]: https://github.com/cleancut/rusty_engine
-[rodio]: https://github.com/tomaka/rodio
+[rodio]: https://github.com/RustAudio/rodio
+
+### Example
+
+```toml
+# Add this to your [dependencies] section in Cargo.toml
+rusty_audio = "1.0"
+```
+
+```rust
+// main.rs
+use rusty_audio::Audio;
+
+fn main() {
+    let mut audio = Audio::new();
+    audio.add("startup", "audio_subsystem_initialized.mp3"); // Load the sound, give it a name
+    audio.play("startup"); // Execution continues while playback occurs in another thread.
+    audio.wait(); // Block until sounds finish playing
+}
+```
 
 ### Dependencies on Linux
 
-`rusty_audio` should work out-of-the-box on macOS, Windows, iOS, and emscripten.  For Linux, the
-downstream package for actually _playing_ sound ([CPAL](https://github.com/RustAudio/cpal) requires
+`rusty_audio` should work out-of-the-box on macOS, Windows, and iOS.  For Linux, the
+([CPAL](https://github.com/RustAudio/cpal) package that is used under the hood requires
 the *alsa* development libraries to be installed.
 
 **CentOS**
