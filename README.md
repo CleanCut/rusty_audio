@@ -1,9 +1,13 @@
 # `rusty_audio`
 
 `rusty_audio` is a fun and easy audio library that provides a 4-track audio system to load/decode
-audio files and play them. Supported formats are: MP3, WAV, Vorbis and Flac.
+audio files and play them. 
 
-This library uses the very powerful [rodio] audio playback library under the hood, which you should
+- Formats: MP3, WAV, Vorbis and Flac.
+- Platforms: Supports macOS, Windows, and iOS out of the box. Linux requires installation of
+  [extra dependencies](#dependencies-on-linux).
+
+This library uses the [rodio] audio playback library under the hood, which you should
 consider using directly if your needs are more complex.
 
 [`rusty_engine`]: https://github.com/cleancut/rusty_engine
@@ -30,7 +34,7 @@ fn main() {
 
 ### Dependencies on Linux
 
-`rusty_audio` should work out-of-the-box on macOS, Windows, and iOS.  For Linux, the
+For Linux, the
 ([CPAL](https://github.com/RustAudio/cpal) package that is used under the hood requires
 the *alsa* development libraries to be installed.
 
