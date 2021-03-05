@@ -5,8 +5,8 @@
 
 # `rusty_audio`
 
-`rusty_audio` is a fun and easy audio library that provides a 4-track audio system to load/decode
-audio files and play them. 
+`rusty_audio` is a fun and easy audio playback library that provides a 4-track audio system to
+load/decode audio files and play them, perfect for small projects.
 
 - Formats: MP3, WAV, Vorbis and Flac.
 - Platforms: Supports macOS, Windows, and iOS out of the box. Linux requires installation of
