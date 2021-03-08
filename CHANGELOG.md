@@ -4,7 +4,10 @@
 
 ### Changed
 
-- Broke `rusty_audio` back out of `rusty_engine` into its own standalone project again
+- Moved `rusty_audio` back out of `rusty_engine` into its own standalone project again
+- Fixed adding clips being broken
+- Updated `rodio` to 0.13.0
+- Added a `play` example. Run it with `cargo run --example play`
 
 ## 1.1.5 - 2021-02-26
 
@@ -52,3 +55,6 @@
 - Initial release, ported from [rusty_sword_arena](https://github.com/cleancut/rusty_sword_arena)
   so it can be reused in other projects such as 
   [rusty_sword](https://github.com/cleancut/rusty_sword)
+
+<!-- next-url -->
+[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.1.5...HEAD

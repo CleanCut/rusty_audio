@@ -13,5 +13,15 @@ license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[package.metadata.release]
+pre-release-replacements = [
+    { file = "README.md", search = "rusty_audio = \"[0-9.]+\"", replace = "rusty_audio = \"{{version}}\"" },
+    { file = "CHANGELOG.md", search = "Unreleased", replace = "{{version}}" },
+    { file = "CHANGELOG.md", search = "\\.\\.\\.HEAD", replace = "...{{tag_name}}", exactly = 1 },
+    { file = "CHANGELOG.md", search = "ReleaseDate", replace = "{{date}}" },
+    { file = "CHANGELOG.md", search = "<!-- next-header -->", replace = "<!-- next-header -->\n\n## [Unreleased] - ReleaseDate", exactly = 1 },
+    { file = "CHANGELOG.md", search = "<!-- next-url -->", replace = "<!-- next-url -->\n[Unreleased]: https://github.com/cleancut/rusty_audio/compare/{{tag_name}}...HEAD", exactly = 1 },
+]
+
 [dependencies]
 rodio = "0.13.0"
