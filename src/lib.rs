@@ -31,6 +31,7 @@ pub struct Audio {
     clips: HashMap<&'static str, Buffered<Decoder<Cursor<Vec<u8>>>>>,
     channels: Vec<Sink>,
     current_channel: usize,
+    disabled: bool,
 }
 
 impl Audio {
@@ -47,12 +48,14 @@ impl Audio {
                 clips,
                 channels,
                 current_channel: 0,
+                disabled: false,
             }
         } else {
             Self {
                 clips: HashMap::new(),
                 channels: Vec::new(),
                 current_channel: 0,
+                disabled: true,
             }
         }
     }
@@ -61,46 +64,51 @@ impl Audio {
     /// you will refer to this clip as when you need to play it.  Files known to be supported by the
     /// underlying library (rodio) at the time of this writing are MP3, WAV, Vorbis and Flac.
     pub fn add(&mut self, name: &'static str, path: &str) {
-        if !self.clips.is_empty() {
-            let mut file_vec: Vec<u8> = Vec::new();
-            File::open(path)
-                .expect("Couldn't find audio file to add.")
-                .read_to_end(&mut file_vec)
-                .expect("Failed reading in opened audio file.");
-            let cursor = Cursor::new(file_vec);
-            let decoder = Decoder::new(cursor).unwrap();
-            let buffered = decoder.buffered();
-            // Buffers are lazily decoded, which often leads to static on first play on low-end systems
-            // or when you compile in debug mode.  Since this library is intended for educational
-            // projects, those are going to be common conditions.  So, to optimize for our use-case, we
-            // will pre-warm all of our audio buffers by forcing things to be decoded and cached right
-            // now when we first load the file.  I would like to find a cleaner way to do this, but the
-            // following scheme (iterating through a clone and discarding the decoded frames) works
-            // since clones of a Buffered share the actual decoded data buffer cache by means of Arc and
-            // Mutex.
-            let warm = buffered.clone();
-            for i in warm {
-                #[allow(clippy::drop_copy)]
-                drop(i);
-            }
-            self.clips.insert(name, buffered);
+        if self.disabled {
+            return;
         }
+        let mut file_vec: Vec<u8> = Vec::new();
+        File::open(path)
+            .expect("Couldn't find audio file to add.")
+            .read_to_end(&mut file_vec)
+            .expect("Failed reading in opened audio file.");
+        let cursor = Cursor::new(file_vec);
+        let decoder = Decoder::new(cursor).unwrap();
+        let buffered = decoder.buffered();
+        // Buffers are lazily decoded, which often leads to static on first play on low-end systems
+        // or when you compile in debug mode.  Since this library is intended for educational
+        // projects, those are going to be common conditions.  So, to optimize for our use-case, we
+        // will pre-warm all of our audio buffers by forcing things to be decoded and cached right
+        // now when we first load the file.  I would like to find a cleaner way to do this, but the
+        // following scheme (iterating through a clone and discarding the decoded frames) works
+        // since clones of a Buffered share the actual decoded data buffer cache by means of Arc and
+        // Mutex.
+        let warm = buffered.clone();
+        for i in warm {
+            #[allow(clippy::drop_copy)]
+            drop(i);
+        }
+        self.clips.insert(name, buffered);
     }
     /// Play an audio clip that has already been loaded.  `name` is the name you chose when you
     /// added the clip to the `Audio` system. If you forgot to load the clip first, this will crash.
     pub fn play(&mut self, name: &str) {
-        if !self.clips.is_empty() {
-            let buffer = self.clips.get(name).expect("No clip by that name.").clone();
-            self.channels[self.current_channel].append(buffer);
-            self.current_channel += 1;
-            if self.current_channel >= self.channels.len() {
-                self.current_channel = 0;
-            }
+        if self.disabled {
+            return;
+        }
+        let buffer = self.clips.get(name).expect("No clip by that name.").clone();
+        self.channels[self.current_channel].append(buffer);
+        self.current_channel += 1;
+        if self.current_channel >= self.channels.len() {
+            self.current_channel = 0;
         }
     }
     /// Block until no sounds are playing. Convenient for keeping a thread alive until all sounds
     /// have played.
     pub fn wait(&self) {
+        if self.disabled {
+            return;
+        }
         loop {
             if self.channels.iter().any(|x| !x.empty()) {
                 std::thread::sleep(std::time::Duration::from_millis(50));
