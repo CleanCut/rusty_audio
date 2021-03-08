@@ -14,7 +14,7 @@
 
 use rodio::{
     source::{Buffered, Source},
-    Decoder, Sink,
+    Decoder, OutputStream, OutputStreamHandle, Sink,
 };
 use std::collections::HashMap;
 use std::fs::File;
@@ -31,40 +31,47 @@ pub struct Audio {
     clips: HashMap<&'static str, Buffered<Decoder<Cursor<Vec<u8>>>>>,
     channels: Vec<Sink>,
     current_channel: usize,
-    disabled: bool,
+    output: Option<(OutputStream, OutputStreamHandle)>,
 }
 
 impl Audio {
     /// Create a new sound subsystem.  You only need one of these -- you can use it to load and play
     /// any number of audio clips.
     pub fn new() -> Self {
-        if let Some(endpoint) = rodio::default_output_device() {
+        if let Ok(output) = OutputStream::try_default() {
             let clips = HashMap::new();
             let mut channels: Vec<Sink> = Vec::new();
-            for _ in 0..4 {
-                channels.push(Sink::new(&endpoint))
+            for i in 0..4 {
+                let sink = Sink::try_new(&output.1)
+                    .expect(&format!("Failed to create sound channel {}", i));
+                channels.push(sink);
             }
             Self {
                 clips,
                 channels,
                 current_channel: 0,
-                disabled: false,
+                output: Some(output),
             }
         } else {
             Self {
                 clips: HashMap::new(),
                 channels: Vec::new(),
                 current_channel: 0,
-                disabled: true,
+                output: None,
             }
         }
+    }
+    /// If no sound device was detected, the audio subsystem will run in a disabled mode that
+    /// doesn't actually do anything. This method indicates whether audio is disabled.
+    pub fn disabled(&self) -> bool {
+        self.output.is_none()
     }
     /// Add an audio clip to play.  Audio clips will be decoded and buffered during this call so
     /// the first call to `.play()` is not staticky if you compile in debug mode.  `name` is what
     /// you will refer to this clip as when you need to play it.  Files known to be supported by the
     /// underlying library (rodio) at the time of this writing are MP3, WAV, Vorbis and Flac.
     pub fn add(&mut self, name: &'static str, path: &str) {
-        if self.disabled {
+        if self.disabled() {
             return;
         }
         let mut file_vec: Vec<u8> = Vec::new();
@@ -93,7 +100,7 @@ impl Audio {
     /// Play an audio clip that has already been loaded.  `name` is the name you chose when you
     /// added the clip to the `Audio` system. If you forgot to load the clip first, this will crash.
     pub fn play(&mut self, name: &str) {
-        if self.disabled {
+        if self.disabled() {
             return;
         }
         let buffer = self.clips.get(name).expect("No clip by that name.").clone();
@@ -106,7 +113,7 @@ impl Audio {
     /// Block until no sounds are playing. Convenient for keeping a thread alive until all sounds
     /// have played.
     pub fn wait(&self) {
-        if self.disabled {
+        if self.disabled() {
             return;
         }
         loop {
