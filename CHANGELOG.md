@@ -2,6 +2,8 @@
 
 ## [Unreleased] - ReleaseDate
 
+## [1.2.0] - 2021-03-07
+
 ### Changed
 
 - Moved `rusty_audio` back out of `rusty_engine` into its own standalone project again
@@ -57,4 +59,5 @@
   [rusty_sword](https://github.com/cleancut/rusty_sword)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.1.5...HEAD
+[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/cleancut/rusty_audio/compare/v1.1.5...v1.2.0
