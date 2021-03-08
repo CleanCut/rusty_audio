@@ -43,7 +43,7 @@ impl Audio {
             let mut channels: Vec<Sink> = Vec::new();
             for i in 0..4 {
                 let sink = Sink::try_new(&output.1)
-                    .expect(&format!("Failed to create sound channel {}", i));
+                    .unwrap_or_else(|_| panic!("Failed to create sound channel {}", i));
                 channels.push(sink);
             }
             Self {
