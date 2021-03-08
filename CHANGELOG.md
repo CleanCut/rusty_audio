@@ -7,7 +7,6 @@
 ### Changed
 
 - Moved `rusty_audio` back out of `rusty_engine` into its own standalone project again
-- Fixed adding clips being broken
 - Updated `rodio` to 0.13.0
 - Added a `play` example. Run it with `cargo run --example play`
 
