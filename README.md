@@ -1,6 +1,6 @@
-[![Crates.io](https://img.shields.io/crates/v/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
-[![Crates.io](https://img.shields.io/crates/d/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
-[![Rust](https://github.com/cleancut/rusty_audio/workflows/CI/badge.svg)](https://github.com/cleancut/rusty_audio/actions)
+[![Crates.io Version](https://img.shields.io/crates/v/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
+[![Crates.io Downloads](https://img.shields.io/crates/d/rusty_audio.svg)](https://crates.io/crates/rusty_audio)
+[![Build Status](https://github.com/cleancut/rusty_audio/workflows/CI/badge.svg)](https://github.com/cleancut/rusty_audio/actions)
 
 
 # Rusty Audio Playback Library
