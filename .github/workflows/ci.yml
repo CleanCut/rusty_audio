@@ -31,7 +31,7 @@ jobs:
       - name: install linux deps
         run: |
           sudo apt update
-          sudo apt install libasound2-dev pkg-config
+          sudo apt install --no-install-recommends libasound2-dev pkg-config
         if: contains(matrix.os, 'ubuntu')
 
       - name: install ${{ matrix.toolchain }} toolchain
@@ -43,18 +43,15 @@ jobs:
           # Don't use a 'components:' entry--we don't need them with beta/nightly, plus nightly often doesn't have them
           override: true
 
-      - run: rustup component add clippy
+      - name: clippy
+        run: |
+          rustup component add clippy
+          cargo clippy -- -D warnings
         if: matrix.toolchain == 'stable' && matrix.os == 'ubuntu-latest'
 
-      - run: cargo clippy --workspace
+      - run: |
+          rustup component add rustfmt
+          cargo fmt --all -- --check
         if: matrix.toolchain == 'stable' && matrix.os == 'ubuntu-latest'
 
-      - run: rustup component add rustfmt
-        if: matrix.toolchain == 'stable' && matrix.os == 'ubuntu-latest'
-
-      - run: cargo fmt --all -- --check
-        if: matrix.toolchain == 'stable' && matrix.os == 'ubuntu-latest'
-
-      - run: cargo test --workspace --all-targets --all-features
-        env:
-          MACOS: ${{ matrix.MACOS }} # Used by some tests
+      - run: cargo test --all-targets --all-features
