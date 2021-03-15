@@ -35,6 +35,14 @@ fn main() {
 }
 ```
 
+### Built-in Example
+
+You can run the built-in example by cloning this repository, and then running:
+
+```shell
+$ cargo run --example play
+```
+
 ### Dependencies on Linux
 
 For Linux, the [CPAL] package that is used under the hood

@@ -28,6 +28,7 @@
 
 - `rusty_audio` became part of [`rusty_engine`] as of this release (reverted in after 1.1.5)
 - Added option to use Apache 2.0 license
+- Moved `rusty_audio` to the `rusty_engine` workspace and re-exported it as `audio`
 
 [`rusty_engine`]: https://github.com/cleancut/rusty_engine
 
