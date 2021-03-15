@@ -2,6 +2,11 @@
 
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+- Fixed clippy warnings
+- Improved CI & Readme
+
 ## [1.2.0] - 2021-03-07
 
 ### Changed
