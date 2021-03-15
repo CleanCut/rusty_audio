@@ -2,6 +2,8 @@
 
 ## [Unreleased] - ReleaseDate
 
+## [1.2.1] - 2021-03-14
+
 ### Changed
 
 - Fixed clippy warnings
@@ -64,5 +66,6 @@
   [rusty_sword](https://github.com/cleancut/rusty_sword)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/cleancut/rusty_audio/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/cleancut/rusty_audio/compare/v1.1.5...v1.2.0
