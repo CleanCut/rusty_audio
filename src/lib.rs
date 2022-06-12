@@ -16,9 +16,9 @@ use rodio::{
     source::{Buffered, Source},
     Decoder, OutputStream, OutputStreamHandle, Sink,
 };
-use std::collections::HashMap;
 use std::fs::File;
 use std::io::{Cursor, Read};
+use std::{collections::HashMap, path::PathBuf};
 
 pub mod prelude {
     pub use crate::Audio;
@@ -28,7 +28,7 @@ pub mod prelude {
 /// formats are: MP3, WAV, Vorbis and Flac.
 #[derive(Default)]
 pub struct Audio {
-    clips: HashMap<&'static str, Buffered<Decoder<Cursor<Vec<u8>>>>>,
+    clips: HashMap<String, Buffered<Decoder<Cursor<Vec<u8>>>>>,
     channels: Vec<Sink>,
     current_channel: usize,
     output: Option<(OutputStream, OutputStreamHandle)>,
@@ -70,12 +70,12 @@ impl Audio {
     /// the first call to `.play()` is not staticky if you compile in debug mode.  `name` is what
     /// you will refer to this clip as when you need to play it.  Files known to be supported by the
     /// underlying library (rodio) at the time of this writing are MP3, WAV, Vorbis and Flac.
-    pub fn add(&mut self, name: &'static str, path: &str) {
+    pub fn add<S: Into<String>, P: Into<PathBuf>>(&mut self, name: S, path: P) {
         if self.disabled() {
             return;
         }
         let mut file_vec: Vec<u8> = Vec::new();
-        File::open(path)
+        File::open(path.into())
             .expect("Couldn't find audio file to add.")
             .read_to_end(&mut file_vec)
             .expect("Failed reading in opened audio file.");
@@ -95,15 +95,19 @@ impl Audio {
             #[allow(clippy::drop_copy)]
             drop(i);
         }
-        self.clips.insert(name, buffered);
+        self.clips.insert(name.into(), buffered);
     }
     /// Play an audio clip that has already been loaded.  `name` is the name you chose when you
     /// added the clip to the `Audio` system. If you forgot to load the clip first, this will crash.
-    pub fn play(&mut self, name: &str) {
+    pub fn play<S: Into<String>>(&mut self, name: S) {
         if self.disabled() {
             return;
         }
-        let buffer = self.clips.get(name).expect("No clip by that name.").clone();
+        let buffer = self
+            .clips
+            .get(&name.into())
+            .expect("No clip by that name.")
+            .clone();
         self.channels[self.current_channel].append(buffer);
         self.current_channel += 1;
         if self.current_channel >= self.channels.len() {
