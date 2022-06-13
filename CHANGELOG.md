@@ -2,6 +2,8 @@
 
 ## [Unreleased] - ReleaseDate
 
+## [1.3.0] - 2022-06-13
+
 ### Changed
 
 - Instead of accepting only `&'static str`, which was difficult to use with anything other than a string literal, `Audio::add` and `Audio::play` are now generic over anything that implements `Into<String>` for the name and `Into<PathBuf>` for the filename.
@@ -72,6 +74,7 @@
   [rusty_sword](https://github.com/cleancut/rusty_sword)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/cleancut/rusty_audio/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/cleancut/rusty_audio/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/cleancut/rusty_audio/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/cleancut/rusty_audio/compare/v1.1.5...v1.2.0

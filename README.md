@@ -20,7 +20,7 @@ consider using directly if your needs are more complex.
 
 ```toml
 # Add this to your [dependencies] section in Cargo.toml
-rusty_audio = "1.2.1"
+rusty_audio = "1.3.0"
 ```
 
 ```rust
