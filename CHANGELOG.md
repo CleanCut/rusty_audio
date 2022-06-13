@@ -2,6 +2,10 @@
 
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+- Even better than the change in `1.3.0`, instead of accepting `Into<_>` for `Audio::add` and `Audio::play`, lets accept `AsRef<str>` and `AsRef<Path>`, since that's what we'll be dealing with a lot of the time. And there shouldn't be any situations which force folks to clone something to pass to these methods. 🤞🏻
+
 ## [1.3.0] - 2022-06-13
 
 ### Changed
