@@ -16,9 +16,9 @@ use rodio::{
     source::{Buffered, Source},
     Decoder, OutputStream, OutputStreamHandle, Sink,
 };
-use std::fs::File;
+use std::collections::HashMap;
 use std::io::{Cursor, Read};
-use std::{collections::HashMap, path::PathBuf};
+use std::{fs::File, path::Path};
 
 pub mod prelude {
     pub use crate::Audio;
@@ -70,12 +70,12 @@ impl Audio {
     /// the first call to `.play()` is not staticky if you compile in debug mode.  `name` is what
     /// you will refer to this clip as when you need to play it.  Files known to be supported by the
     /// underlying library (rodio) at the time of this writing are MP3, WAV, Vorbis and Flac.
-    pub fn add<S: Into<String>, P: Into<PathBuf>>(&mut self, name: S, path: P) {
+    pub fn add<S: AsRef<str>, P: AsRef<Path>>(&mut self, name: S, path: P) {
         if self.disabled() {
             return;
         }
         let mut file_vec: Vec<u8> = Vec::new();
-        File::open(path.into())
+        File::open(path.as_ref())
             .expect("Couldn't find audio file to add.")
             .read_to_end(&mut file_vec)
             .expect("Failed reading in opened audio file.");
@@ -95,17 +95,17 @@ impl Audio {
             #[allow(clippy::drop_copy)]
             drop(i);
         }
-        self.clips.insert(name.into(), buffered);
+        self.clips.insert(name.as_ref().to_string(), buffered);
     }
     /// Play an audio clip that has already been loaded.  `name` is the name you chose when you
     /// added the clip to the `Audio` system. If you forgot to load the clip first, this will crash.
-    pub fn play<S: Into<String>>(&mut self, name: S) {
+    pub fn play<S: AsRef<str>>(&mut self, name: S) {
         if self.disabled() {
             return;
         }
         let buffer = self
             .clips
-            .get(&name.into())
+            .get(name.as_ref())
             .expect("No clip by that name.")
             .clone();
         self.channels[self.current_channel].append(buffer);
