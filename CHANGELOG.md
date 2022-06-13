@@ -2,6 +2,12 @@
 
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+- Instead of accepting only `&'static str`, which was difficult to use with anything other than a string literal, `Audio::add` and `Audio::play` are now generic over anything that implements `Into<String>` for the name and `Into<PathBuf>` for the filename.
+- Documented the release process & moved the release config into a dedicated file
+- Updated to `rodio 0.14.0`.
+
 ## [1.2.1] - 2021-03-14
 
 ### Changed
