@@ -2,6 +2,10 @@
 
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+- Update to `rodio 0.17.1`
+
 ## [1.4.0] - 2022-06-13
 
 ### Changed
