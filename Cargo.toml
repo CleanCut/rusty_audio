@@ -1,6 +1,6 @@
 [package]
 name = "rusty_audio"
-version = "1.4.0"
+version = "1.4.1"
 edition = "2021"
 description = "Convenient sound library for small projects and educational purposes."
 homepage = "https://github.com/cleancut/rusty_engine/tree/master/rusty_audio"
